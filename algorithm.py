@@ -23,7 +23,6 @@ REC_SIZE = 5 #عدد المنتجات في كل توصية
 product_ids = products['product_id'].tolist()
 
 # إنشاء حل عشوائي يتكون منتجات بعدد محدد
-
 def create_individual():
     return random.sample(product_ids, REC_SIZE)# rec_size  اختيار ارقام عشوائية من قائمة ارقام المنتجات واختيار عددها نسبة ل
 
@@ -43,6 +42,8 @@ def fitness(individual, user_id):
             score += r['clicked'] * 2
             score += r['purchased'] * 5
             score += r['rating']          
+    if score == 0:
+        score += random.random()
     return score
 
 # اختيار الأفضل
@@ -66,9 +67,17 @@ def mutation(individual):
 
 # تشغيل الخوارزمية
 def run_ga(user_id):
+
+    # تحقق من وجود المستخدم
+    if user_id not in users["user_id"].values:
+        return []
+
+    # إذا المستخدم ما عنده بيانات → توصيات عشوائية
+    if data[data['user_id'] == user_id].empty:
+        return random.sample(product_ids, REC_SIZE)
+
     #انشاء مجموعة من التوصيات
     population = create_population()
-
     for _ in range(GENS):
         # تقييم التوصيات واختيار الافضل ووضعها في متغير وحفظها في متغيير التوصيات الجديدة
         selected = selection(population, user_id)
@@ -89,7 +98,6 @@ def run_ga(user_id):
     return best
 
 
-# تجربة مباشرة (اختياري)
 if __name__ == "__main__":
     user_id = users.iloc[0]['user_id']
     print("Best recommendations:", run_ga(user_id))
