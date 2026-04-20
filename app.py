@@ -19,9 +19,11 @@ def get_product_info(pid):
 @app.route("/",methods=["GET","POST"])
 def select_user():
     if request.method=="POST":
-        user_id=request.form.get("user_id",int)
+        user_id=int(request.form.get("user_id"))
         #تخزين التوصيات الافضل المعطاة من الخوارزمية داخل متغير
         rec_ids = run_ga(user_id)
+        if not rec_ids:
+            return render_template("select_user.html",error="User is Not Correct")
         # تحويل رقم المنتج الى مواصفاته المطلوبة وتخزينها كقاموس داخل متغير
         recs = [get_product_info(pid) for pid in rec_ids]
         # لعرضها Html ارسال جميع هذه البيانات الى صفحة 
