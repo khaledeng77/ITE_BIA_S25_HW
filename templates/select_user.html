@@ -67,6 +67,10 @@ button:hover {
     <form action="" method="POST">
         <input type="number" name="user_id" required placeholder="User Id">
         <button type="submit">Show Recommendations</button>
+        {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
     </form>
+    
 </body>
 </html>
