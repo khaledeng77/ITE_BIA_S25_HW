@@ -1,6 +1,6 @@
 import pandas as pd
 import random
-
+random.seed(42)
 # تحميل البيانات
 #باستخدام مكتبة بانداس نستطيع قراءة ملفات ايكسل ونضعها في جداول 
 users = pd.read_excel("data/users.xlsx")
