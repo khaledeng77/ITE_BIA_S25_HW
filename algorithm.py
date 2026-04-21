@@ -56,14 +56,7 @@ def selection(population, user_id):
 def crossover(p1, p2):
     cut = len(p1) // 2 # رقم صحيح يساوي نصف توصية الاب
     child = p1[:cut] + p2[cut:] #توليد التوصية الجديدة بناء على الرقم الصحيح السابق 
-    # إزالة التكرار
-    child = list(set(child))
-    # ضمان 5 عناصر دائمًا
-    while len(child) < REC_SIZE:
-        new_item = random.choice(product_ids)
-        if new_item not in child:
-            child.append(new_item)
-    return child[:REC_SIZE]
+    return list(set(child))[:REC_SIZE]
 # الطفرة
 def mutation(individual):
     if random.random() < 0.3: # شرط يقوم بتوليد رقم بين صفر وواحد 
