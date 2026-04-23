@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,url_for,redirect
+from flask import Flask, render_template,request
 from algorithm import run_ga, products
 import os
 #انشاء تطبيق الويب وتعريفه على مكان المشروع للوصل الى كافة الملفات
