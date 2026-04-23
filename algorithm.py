@@ -93,5 +93,11 @@ def run_ga(user_id):
 
         population = new_population
     # باستخدام تابع التقييم score اختيار التوصية الافضل بناء على
+    # باستخدام تابع التقييم score اختيار التوصية الافضل بناء على
     best = max(population, key=lambda x: fitness(x, user_id))
+    # ضمان الطول
+    while len(best) < REC_SIZE:
+        new_item = random.choice(product_ids)
+        if new_item not in best:
+            best.append(new_item)
     return best
