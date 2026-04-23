@@ -95,8 +95,3 @@ def run_ga(user_id):
     # باستخدام تابع التقييم score اختيار التوصية الافضل بناء على
     best = max(population, key=lambda x: fitness(x, user_id))
     return best
-
-
-if __name__ == "__main__":
-    user_id = users.iloc[0]['user_id']
-    print("Best recommendations:", run_ga(user_id))
